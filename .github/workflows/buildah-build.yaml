@@ -7,7 +7,7 @@ env:
   IMAGE_NAME: test-multi-arch
   IMAGE_TAG: latest
   IMAGE_REGISTRY: docker.io
-  IMAGE_NAMESPACE: lixd96
+  IMAGE_NAMESPACE: dodok0a
 
 jobs:
   build:
@@ -17,11 +17,11 @@ jobs:
     steps:
       # Checkout the repository
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       # Set up QEMU for cross-platform builds
       - name: Set up QEMU for multi-arch support
-        uses: docker/setup-qemu-action@v1
+        uses: docker/setup-qemu-action@v3
 
       # Build the Docker image using Buildah
       - name: Build multi-architecture image
@@ -30,7 +30,7 @@ jobs:
         with:
           image: ${{ env.IMAGE_NAME }}
           tags: ${{ env.IMAGE_TAG }}
-          archs: amd64,ppc64le,s390x,arm64  # Specify the architectures for multi-arch support
+          archs: amd64,arm64  # Specify the architectures for multi-arch support
           dockerfiles: |
             ./Dockerfile
 
